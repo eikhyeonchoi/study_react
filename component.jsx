@@ -1,7 +1,7 @@
 import React, {Component, Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 
-/**
+/** 
  * 클래스형 컴포넌트
  * (state 기능, 라이프사이클, 임의의 메서드) 가 가능하다
  * render함수가 필수고, jsx를 리턴해야함
@@ -98,6 +98,7 @@ Child.PropTypes = {
  * props의 default 값과 type을 지정해놓을 수 있다
  */
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * state
@@ -208,5 +209,63 @@ const Say = () => {
  * 클래스형 컴포넌트에서는 state객체 및 setState로 state를 관리할 수 있고
  * 함수형 컴포넌트에서는 useState를 통해 state를 관리할 수 있다(권장)
  */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * component의 반복
+ */
+const IterationSample = () => {
+    const [names, setNames] = useState([]);
+    const [next, setNext] = useState(1);
+    const [name, setName] = useState('');
+
+    const change = (e) => {
+        setName(e.target.value);
+    };
+
+    const click = () => {
+        if(!name) {
+            alert('no name');
+            return;
+        }
+
+        setNames([...names, {id:next, name:name}]);
+        setNext(next + 1);
+        setName('');
+    };
+
+    /**
+     * map을 이용해 component를 반복할 수 있음
+     * filter를 이용해 component를 삭제할 수 있음
+     * map, filter은 새로운 배열을 리턴함
+     * 기존 state(names)는 그대로 두면서 새로운 값을 이용해서 작업해야함
+     * 이를 "불변성유지" 라고함 -> 성능 최적화를 위해
+     * 
+     * 컴포넌트 배열을 렌더링할때엔 항상 key값 설정을 주의해야함
+     * key가 중복되면 안됨 중복되면 렌더링과정에서 오류가 발생함
+     * 
+     * 주의할점
+     * 1. state를 직접건드리면서 렌더링하면 안됨
+     * 2. key값 설정에 주의해야함(중복되면 렌더링오류)
+     */
+    const remove = (id) => {
+        setNames(names.filter(item => item.id !== id));
+    };
+    const list = names.map(item => <li onDoubleClick={()=> remove(item.id)} key={item.id}>{item.name}</li>);
+
+    return (
+        <div>
+            <div>
+                <input onChange={change} value={name}/>
+                <button onClick={click}>add</button>
+            </div>
+            <ul>
+                {list}
+            </ul>
+        </div>
+    );
+};
+
 
  export {App, Parent, Child, Say};

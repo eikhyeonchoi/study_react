@@ -7,6 +7,8 @@
  * 말그대로 .css를 만든 뒤 import 후 사용
  */
 
+
+
 /**
  * 2. sass사용
  * 두 가지 확장자 scss, sass을 지원함
@@ -40,8 +42,10 @@
  * @import '~open-color/open-color'; 
  */
 
+
+
 /**
- * css module 사용
+ * 3. css module 사용
  * css를 불러와서 사용할 때 클래스 이름을 고유한 값 즉 "파일이름_클래스이름__해시값" 형태로
  * 자동으로 만들어서 컴포넌트 스타일 클래스 이름이 중첩되지 않도록 함
  * .module.css 확장자로 파일을 저장하기만 하면 CSS Module이 적용됨
@@ -53,9 +57,14 @@
 //     color: white;
 //     font-size: 2rem;
 // }
+// 글로벌 css를 작성하고 싶다면..
 // :global .something {
 //     font-weight: 800;
 //     color: aqua;
+// }
+// 일반 css파일(.css, .scss)에서도 :local을 사용해 CSS Module을 사용할 수 있다
+// :local .wrapper{
+//
 // }
 
 /**
@@ -80,14 +89,82 @@ const CSSModule = () => {
         </div>
     );
 };
-
-
-
 import CSSModule from './CSSModule.js';
 const App = () => {
     return (
         <div>
             <CSSModule/>
         </div>
+    );
+};
+
+
+
+/**
+ * 4. styled-components
+ * 자바스크립트 파일 안에 스타일을 선언하는 방식
+ * 벡틱문자열에 스타일정보를 넣었음 여기서 사용한 문법을 Tagged 템플릿 리터럴이라고 부름
+ * 일반 템플릿 리터럴과 다른 점은 템플릿 안에 JS객체나 함수를 전달하면 온전히 추출 가능
+ *
+ * 예제 `hello ${{foo:bar}} ${()=>'world'}`
+ * 일반 템플릿 결과: "hello [object Object] ()=> 'world'!"
+ * Tagged 템플릿 결과: (3) [Array(3), {...}, f]
+ * 
+ * 만약 컴포넌트 자체에 스타일을 넣고싶다면(예제)
+ * className props를 최상위 DOM의 className값으로 설정하는 작업을 해놔야함
+ * const Sample = ({className}) => {
+ *      return <div className={className}>Sample</div>
+ * }
+ * const StyledSample = styled(Sample)`
+ *      font-size: 2rem;
+ * `;
+ * 
+ */
+import styled, {css} from 'styled-components';
+const Box = styled.div`
+    background: ${props=> props.color || 'blue'};
+    padding: 1rem;
+    display: flex;
+`;
+const Button = styled.button`
+    background: white;
+    color: black;
+    border-radius: 4px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 600;
+
+    &:hover {
+        background: rgba(255,255,255,0.9);
+    }
+
+    // props에 따른 조건부 스타일링
+    ${props => props.inverted && 
+        // css를 안붙이고 그냥 써도 되지만 안에서 props를 참조한다면 반드시 css로 감싸야함
+        css`
+            background: none;
+            border: 2px solid white;
+            color: white;
+            &:hover {
+                background: white;
+                color: black;
+            }
+    `};
+
+    & + button {
+        margin-left: 1rem;
+    }
+`;
+
+const StyledComponent = () => {
+    return (
+        <Box color="black">
+            <Button>hi</Button>
+            <Button inverted={true}>테두리만</Button>
+        </Box>
     );
 };

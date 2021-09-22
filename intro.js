@@ -19,5 +19,14 @@
  * 이렇게 파일을 불러오는 것은 로더가 담당함(file-loader, css-loader, babel-loader)
  * babel-loader는 js파일을 불러오면서 최신 js문법을 바벨도구를 이용해 ES5문법으로 바꿈(호환성)
  * 
- * npm init react-app 프로젝트명
+ */
+
+/**
+ * make project
+ * npm init react-app project-name
+ */
+
+/**
+ * frequent use lib
+ * node-sass, classnames, react-virtualized, react-icons, react-virtualized
  */

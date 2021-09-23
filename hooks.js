@@ -192,6 +192,26 @@ const Average = () => {
  * 만들어 놨던 함수를 재사용할 수 있다
  * 위 예제에서 change와 click은 컴포넌트가 리렌더링될 때마다 새로 만들어진 함수를 사용함
  * 규모가 작으면 상관없지만 자주발생하거나 갯수가 많아지면 최적화 해주는게 좋음
+ * 
+ * 정리하면 useCallback을 사용하지 않는다면 그 함수는 컴포넌트가 리렌더링될 때마다
+ * 새로 생성함 매번 새로 생성하는 것을 방지하기위해 useCallback을 사용함
+ * useCallback의 2번째 파라미터(배열)의 요소로 state를 추가해주면 
+ * 해당 state가 update될 때만 함수를 새로 생성한다
+ * 단, 함수가 state에 의존할 때(state를 사용할 때) 2번째 파라미터의 요소로 넣어준다
+ * 빈배열을 넣었을경우 함수를 새로 생성하지 않고 계속 그대로 씀
+ * 쉽게말하면 useState를 함수형으로 업데이트하지 않았다면 useCallback 첫번째 콜백함수
+ * 내부에서 사용하는 state들은 모두 두번째 파라미터 배열의 요소로 넣어야함
+ * ex.
+ * useCallback(()=> {
+ *     setData(data=> ({
+ *         ...data,
+ *         array: [...data.array, {id:nextId.current++, name:form.name, username:form.username}],
+ *     }));
+ * }, [form.name, form.username]);
+ * useCallback의 두 번째 파라미터에 data를 안넣어도 됨, 이유는 setData를 함수형으로 작성했기 때문임
+ * 하지만 form.name, form.username을 적어야함, 이유는 setData는 data의 setter함수라 form state는 관련이 없음
+ * 따라서 form은 요소로 넣어줘야함
+ * 
  * useCallback(param1, param2)
  * param1에는 리렌더링되는 함수
  * param2에는 배열(특정 값이 바뀌었을때 함수를 새로 생성해야 하는지 명시)
@@ -211,7 +231,7 @@ const click = useCallback(() => {
     }
     dispatch({type: 'list', num: num});
     dispatch({type: 'num', num: ''});
-}, [num, list]);
+}, [num]);
 
 
 

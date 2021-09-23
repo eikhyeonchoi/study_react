@@ -28,5 +28,11 @@
 
 /**
  * frequent use lib
- * node-sass, classnames, react-virtualized, react-icons, react-virtualized
+ * node-sass: sass 사용
+ * classnames: className 관리를 쉽게
+ * react-virtualized: 리스트 최적화
+ * react-icons: 아이콘
+ * immer: 불변성 및 깊이가 깊은 state 관리 쉽게
+ * react-router-dom: 라우팅
+ * qs: querystring to object
  */

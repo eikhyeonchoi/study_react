@@ -11,3 +11,7 @@
 >- useState, useReducer, useEffect, useMemo, useCallback, useRef
 >### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/styles.js" target="_blank">styles.js</a>
 >- 일반css, sass, css module, styled-components, tagged 템플릿 리터럴
+>### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/optimization.js" target="_blank">optimization.js</a>
+>- React.memo, useState의 함수형 업데이트, useReducer 사용, 불변성의 중요성(immer), react-virtualized
+>### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/router.js" target="_blank">router.js</a>
+>- 

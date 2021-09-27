@@ -14,4 +14,8 @@
 >### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/optimization.js" target="_blank">optimization.js</a>
 >- React.memo, useState의 함수형 업데이트, useReducer 사용, 불변성의 중요성(immer), react-virtualized
 >### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/router.js" target="_blank">router.js</a>
->- 
+>- SPA, Route, URL파라미터, URL쿼리, withRouter, NavLink
+>### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/contextapi.js" target="_blank">contextapi.js</a>
+>- Context, RenderProps패턴, Consumer, Provider
+>### <a href="https://github.com/eikhyeonchoi/study_react/blob/main/redux.js" target="_blank">redux.js</a>
+>- Redux, (Presentational, Container) Component, createAction, handleActions, userSelector, useActions

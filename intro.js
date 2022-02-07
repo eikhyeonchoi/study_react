@@ -23,7 +23,12 @@
 
 /**
  * make project
- * npm init react-app project-name
+ * 1. node 설치
+ * 2. npm uninstall -g create-react-app
+ * 3. npm install -g create-react-app
+ * 4. npx create-react-app my-app
+ * 5. cd my-app
+ * 6. npm run start
  */
 
 /**
